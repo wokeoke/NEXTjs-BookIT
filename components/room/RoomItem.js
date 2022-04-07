@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -33,9 +34,7 @@ const RoomItem = ({ room }) => {
           </div>
 
           <button className="btn btn-block view-btn">
-            <Link href={`/room/${room._id}`}>
-              <a>View Details</a>
-            </Link>
+            <Link href={`/room/${room._id}`}>View Details</Link>
           </button>
         </div>
       </div>

@@ -5,18 +5,17 @@ import { Carousel } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearError } from '../../redux/actions/roomActions';
+import { clearErrors } from '../../redux/actions/roomActions';
 import RoomFeatures from './RoomFeatures';
 
 const RoomDetails = () => {
   const dispatch = useDispatch();
   const { room, error } = useSelector((state) => state.roomDetails);
-  console.log(room.name);
 
   useEffect(() => {
     if (error) {
       toast.error(error);
-      dispatch(clearError());
+      dispatch(clearErrors());
     }
   }, []);
 
@@ -39,18 +38,19 @@ const RoomDetails = () => {
         </div>
 
         <Carousel hover="pause">
-          {room.images.map((image) => (
-            <Carousel.Item key={image.public_id}>
-              <div style={{ width: '100%', height: '440px' }}>
-                <Image
-                  className="d-block m-auto"
-                  src={image.url}
-                  alt={room.name}
-                  layout="fill"
-                />
-              </div>
-            </Carousel.Item>
-          ))}
+          {room.images &&
+            room.images.map((image) => (
+              <Carousel.Item key={image.public_id}>
+                <div style={{ width: '100%', height: '440px' }}>
+                  <Image
+                    className="d-block m-auto"
+                    src={image.url}
+                    alt={room.name}
+                    layout="fill"
+                  />
+                </div>
+              </Carousel.Item>
+            ))}
         </Carousel>
 
         <div className="row my-5">
@@ -64,7 +64,7 @@ const RoomDetails = () => {
           <div className="col-12 col-md-6 col-lg-4">
             <div className="booking-card shadow-lg p-4">
               <p className="price-per-night">
-                <b>$28</b> / night
+                <b>${room.pricePerNight}</b> / night
               </p>
 
               <button className="btn btn-block py-3 booking-btn">Pay</button>

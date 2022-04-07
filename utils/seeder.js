@@ -25,4 +25,6 @@ const seedRooms = async (req, res) => {
   }
 };
 
+// Terminal
+// node utils/sedder
 seedRooms();

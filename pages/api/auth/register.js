@@ -1,16 +1,12 @@
 import nextConnect from 'next-connect';
 import dbConnect from '../../../config/dbConnect';
-import {
-  getSingleRoom,
-  updateRoom,
-  deleteRoom,
-} from '../../../controllers/roomControllers';
+import { registerUser } from '../../../controllers/authControllers';
 import onError from '../../../middleware/errors';
 
 const handler = nextConnect({ onError });
 
 dbConnect();
 
-handler.get(getSingleRoom).put(updateRoom).delete(deleteRoom);
+handler.post(registerUser);
 
 export default handler;
